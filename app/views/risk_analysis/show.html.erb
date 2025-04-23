@@ -1,0 +1,14 @@
+<h1>Risk Analysis Details</h1>
+
+  <p><strong>ID:</strong> <%= @risk_analysis[:id] %></p>
+  <p><strong>Trade ID:</strong> <%= @risk_analysis[:trade_id] %></p>
+  <p><strong>Risk Score:</strong> <%= @risk_analysis[:risk_score] %></p>
+  <p><strong>Prediction:</strong> <%= @risk_analysis[:prediction] %></p>
+  <p><strong>Created At:</strong> <%= @risk_analysis[:created_at].strftime("%Y-%m-%d %H:%M:%S") if @risk_analysis[:created_at] %></p>
+  <p><strong>Updated At:</strong> <%= @risk_analysis[:updated_at].strftime("%Y-%m-%d %H:%M:%S") if @risk_analysis[:updated_at] %></p>    
+
+<% if @risk_analysis[:id].present? %>
+  <%= link_to 'Edit', edit_risk_analysis_path(@risk_analysis[:id]) %>
+<% end %>
+<%= link_to 'Back', risk_analysis_index_path %>
+

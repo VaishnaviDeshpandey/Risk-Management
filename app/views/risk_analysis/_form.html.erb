@@ -1,0 +1,33 @@
+<% is_edit = risk_analysis[:id].present? %>
+
+<%= form_with url: is_edit ? risk_analysis_path(risk_analysis[:id]) : risk_analysis_index_path,
+              method: is_edit ? :patch : :post,
+              scope: :risk_analysis,
+              local: true do |form| %>
+
+  <%# Hidden ID field (optional, not needed unless you want to show it) %>
+  <% if is_edit %>
+    <%= form.hidden_field :id, value: risk_analysis[:id] %>
+  <% end %>
+
+
+  <div>
+    <%= form.label :trade_id %><br>
+    <%= form.number_field :trade_id, value: risk_analysis[:trade_id] %>
+  </div>
+
+  <div>
+    <%= form.label :risk_score %><br>
+    <%= form.number_field :risk_score, step: 0.01, value: risk_analysis[:risk_score] %>
+  </div>
+
+  <div>
+    <%= form.label :prediction %><br>
+    <%= form.select :prediction, %w[low medium high], {}, selected: risk_analysis[:prediction] %>
+  </div>
+
+  <div>
+    <%= form.submit is_edit ? "Update Risk Analysis" : "Create Risk Analysis" %>
+  </div>
+<% end %>
+

@@ -1,0 +1,35 @@
+<h1>Trades</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Portfolio</th>
+      <th>Asset</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Type</th>
+      <th>Executed At</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @trades.each do |trade| %>
+      <tr>
+        <td><%= trade.portfolio&.user&.username || "N/A" %></td>
+        <td><%= trade.custom_asset&.name || "N/A" %></td>
+        <td><%= trade.quantity %></td>
+        <td><%= trade.price %></td>
+        <td><%= trade.trade_type.capitalize %></td>
+        <td><%= trade.executed_at.strftime("%d %b %Y %H:%M") %></td>
+        <td>
+          <%= link_to 'Show', trade %> |
+          <%= link_to 'Edit', edit_trade_path(trade) %> |
+          <%= link_to 'Delete', trade, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Trade', new_trade_path, class: "btn btn-primary mt-3" %>

@@ -1,0 +1,51 @@
+<h2>Market Data</h2>
+
+<%= form_with url: market_data_path, method: :get, local: true do %>
+  <%= label_tag :symbol, "Filter by Symbol:" %>
+  <%= text_field_tag :symbol, params[:symbol] %>
+
+  <%= label_tag :view, "View:" %>
+  <%= select_tag :view, options_for_select([['Latest', 'latest'], ['Historical', 'historical']], params[:view]) %>
+
+  <%= submit_tag "Filter" %>
+<% end %>
+
+<p>
+  <%= link_to "View Latest", market_data_path(view: 'latest', symbol: params[:symbol]), class: "button" %> |
+  <%= link_to "View Historical", market_data_path(view: 'historical', symbol: params[:symbol]), class: "button" %>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Symbol</th>
+      <th>Date</th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Volume</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @market_data.each do |data| %>
+      <tr>
+        <td><%= data[:symbol] %></td>
+        <td><%= data[:parsed_date] || data[:date] %></td>
+        <td><%= data[:open] %></td>
+        <td><%= data[:high] %></td>
+        <td><%= data[:low] %></td>
+        <td><%= data[:close] %></td>
+        <td><%= data[:volume] %></td>
+        <td>
+          <%= link_to "Show", market_datum_path(data[:id]) %> |
+          <%= link_to "Edit", edit_market_datum_path(data[:id]) %> |
+          <%= link_to "Delete", market_datum_path(data[:id]), method: :delete, data: { confirm: "Are you sure?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New Market Entry", new_market_datum_path %>

@@ -1,0 +1,33 @@
+<h1>Assets</h1>
+
+<%= link_to 'New Custom Asset', new_custom_asset_path, class: 'btn btn-primary mb-3' %>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Symbol</th>
+      <th>Name</th>
+      <th>Asset Type</th>
+      <th>Sector</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @custom_assets.each do |asset| %>
+      <tr>
+        <td><%= asset.symbol %></td>
+        <td><%= asset.name %></td>
+        <td><%= asset.asset_type %></td>
+        <td><%= asset.sector %></td>
+        <td><%= number_to_currency(asset.price) %></td>
+        <td>
+          <%= link_to 'Show', asset, class: 'btn btn-info btn-sm' %>
+          <%= link_to 'Edit', edit_custom_asset_path(asset), class: 'btn btn-warning btn-sm' %>
+          <%= link_to 'Delete', asset, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

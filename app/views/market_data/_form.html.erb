@@ -1,0 +1,36 @@
+<!-- app/views/market_data/_form.html.erb -->
+
+<div>
+  <%= form.label :symbol %>
+  <%= form.text_field :symbol, value: data.symbol %>
+</div>
+
+<div>
+  <%= form.label :date %>
+  <%= form.date_field :date, value: Date.parse(data.date.to_s) %>
+</div>
+
+<div>
+  <%= form.label :open %>
+  <%= form.number_field :open, step: :any, value: data.open %>
+</div>
+
+<div>
+  <%= form.label :high %>
+  <%= form.number_field :high, step: :any, value: data.high %>
+</div>
+
+<div>
+  <%= form.label :low %>
+  <%= form.number_field :low, step: :any, value: data.low %>
+</div>
+
+<div>
+  <%= form.label :close %>
+  <%= form.number_field :close, step: :any, value: data.close %>
+</div>
+
+<div>
+  <%= form.label :volume %>
+  <%= form.number_field :volume, step: 1, value: data.volume %>
+</div>

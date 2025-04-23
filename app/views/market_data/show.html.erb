@@ -1,0 +1,14 @@
+<h1>Market Data Details</h1>
+
+<ul>
+  <li><strong>Symbol:</strong> <%= @data[:symbol] %></li>
+  <li><strong>Date:</strong> <%= @data[:date] %></li>
+  <li><strong>Open:</strong> <%= @data[:open] %></li>
+  <li><strong>High:</strong> <%= @data[:high] %></li>
+  <li><strong>Low:</strong> <%= @data[:low] %></li>
+  <li><strong>Close:</strong> <%= @data[:close] %></li>
+  <li><strong>Volume:</strong> <%= @data[:volume] %></li>
+</ul>
+
+<%= link_to "✏️ Edit", edit_market_datum_path(@data[:id]) %> |
+<%= link_to "⬅ Back", market_data_path %>

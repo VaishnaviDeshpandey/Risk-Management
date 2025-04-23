@@ -1,0 +1,69 @@
+<h1><%= @portfolio.name %></h1>
+
+<h2>Assets in Portfolio</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Asset</th>
+      <th>Quantity</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @portfolio.portfolio_assets.each do |asset| %>
+      <tr>
+        <td><%= asset.custom_asset.name %> (<%= asset.custom_asset.symbol %>)</td>
+        <td><%= asset.quantity %></td>
+        <td>
+          <%= form_with model: [@portfolio, asset], local: true, method: :patch do |f| %>
+            <%= f.number_field :quantity, value: asset.quantity, min: 1 %>
+            <%= f.submit "Update" %>
+          <% end %>
+
+          <%= button_to "Remove", portfolio_portfolio_asset_path(@portfolio, asset),
+              method: :delete, data: { confirm: "Are you sure?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr>
+
+<h3>Add New Asset</h3>
+
+<%= form_with url: portfolio_portfolio_assets_path(@portfolio), local: true do |f| %>
+  <div>
+    <%= label_tag :custom_asset_id, "Asset" %>
+    <%= select_tag "portfolio_asset[custom_asset_id]",
+        options_from_collection_for_select(CustomAsset.all, :id, :name),
+        include_blank: true %>
+  </div>
+
+  <div>
+    <%= label_tag :quantity, "Quantity" %>
+    <%= number_field_tag "portfolio_asset[quantity]", 1, min: 1 %>
+  </div>
+
+  <%= f.submit "Add Asset" %>
+<% end %>
+
+<hr>
+
+<h2>Portfolio Risk Metrics</h2>
+<% if @portfolio.var_value.present? && @portfolio.cvar_value.present? %>
+  <p><strong>VaR (95%):</strong> <%= number_to_currency(@portfolio.var_value) %></p>
+  <p><strong>CVaR (95%):</strong> <%= number_to_currency(@portfolio.cvar_value) %></p>
+  <p><em>Last updated:</em> <%= @portfolio.updated_at.strftime('%d %b %Y %H:%M') %></p>
+<% else %>
+  <p><em>Risk metrics are being calculated...</em></p>
+<% end %>
+
+<%= button_to 'Assess Risk', assess_risk_portfolio_path(@portfolio),
+    method: :post, class: 'btn btn-primary' %>
+
+<%= link_to "Back to Portfolios", portfolios_path, class: "btn btn-secondary" %>
+
+
+

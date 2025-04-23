@@ -1,0 +1,40 @@
+<%= form_with(model: custom_asset, local: true) do |form| %>
+    <% if custom_asset.errors.any? %>
+      <div class="alert alert-danger">
+        <h4><%= pluralize(custom_asset.errors.count, "error") %> prohibited this asset from being saved:</h4>
+        <ul>
+          <% custom_asset.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="mb-3">
+      <%= form.label :symbol, class: "form-label" %>
+      <%= form.text_field :symbol, class: "form-control" %>
+    </div>
+  
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+  
+    <div class="mb-3">
+      <%= form.label :asset_type, class: "form-label" %>
+      <%= form.select :asset_type, ["Stock", "Crypto", "Forex", "Commodity"], {}, class: "form-control" %>
+    </div>
+  
+    <div class="mb-3">
+      <%= form.label :sector, class: "form-label" %>
+      <%= form.text_field :sector, class: "form-control" %>
+    </div>
+  
+    <div class="mb-3">
+      <%= form.label :price, class: "form-label" %>
+      <%= form.number_field :price, step: 0.01, class: "form-control" %>
+    </div>
+  
+    <%= form.submit class: "btn btn-primary" %>
+<% end %>
+  

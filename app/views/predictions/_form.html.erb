@@ -1,0 +1,21 @@
+<%= form_with model: @prediction, url: @prediction.new_record? ? predictions_path : prediction_path(@prediction), method: @prediction.new_record? ? :post : :patch do |form| %>
+  <div>
+    <%= form.label :symbol %>
+    <%= form.text_field :symbol %>
+  </div>
+  <div>
+    <%= form.label :predicted_price %>
+    <%= form.number_field :predicted_price, step: 0.01 %>
+  </div>
+  <div>
+    <%= form.label :risk_level %>
+    <%= form.select :risk_level, ["low", "medium", "high"] %>
+  </div>
+  <div>
+    <%= form.label :forecast_date %>
+    <%= form.datetime_select :forecast_date %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

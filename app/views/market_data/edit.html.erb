@@ -1,0 +1,14 @@
+<!-- app/views/market_data/edit.html.erb -->
+
+<h1>Edit Market Data</h1>
+
+<% is_edit = @data.respond_to?(:id) && @data.id.present? %>
+
+<%= form_with scope: :market_data, url: is_edit ? market_datum_path(@data.id) : market_data_path, method: is_edit ? :patch : :post, local: true do |form| %>
+  <%= render partial: 'form', locals: { form: form, data: @data } %>
+
+  <div>
+    <%= form.submit is_edit ? "Update Market Data" : "Create Market Data" %>
+    <%= link_to "Back", market_data_path %>
+  </div>
+<% end %>

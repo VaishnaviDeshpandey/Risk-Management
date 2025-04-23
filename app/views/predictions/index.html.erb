@@ -1,0 +1,30 @@
+<h1>Predictions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Symbol</th>
+      <th>Predicted Price</th>
+      <th>Risk Level</th>
+      <th>Forecast Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @predictions.each do |prediction| %>
+      <tr>
+        <td><%= prediction[:symbol] %></td>
+        <td><%= prediction[:predicted_price] %></td>
+        <td><%= prediction[:risk_level] %></td>
+        <td><%= Time.parse(prediction[:forecast_date].to_s).utc.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        <td>
+          <%= link_to "Show", prediction_path(prediction[:id]) %> |
+          <%= link_to "Edit", edit_prediction_path(prediction[:id]) %> |
+          <%= link_to "Delete", prediction_path(prediction[:id]), method: :delete, data: { confirm: "Are you sure?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New Prediction", new_prediction_path %>

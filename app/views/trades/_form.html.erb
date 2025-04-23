@@ -1,0 +1,51 @@
+<%= form_with(model: trade, local: true) do |form| %>
+  <% if trade.errors.any? %>
+    <div class="alert alert-danger">
+      <h2><%= pluralize(trade.errors.count, "error") %> prevented this trade from being saved:</h2>
+      <ul>
+        <% trade.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :portfolio_id %>
+  <%= form.hidden_field :custom_asset_id %>
+
+  <div class="mb-3">
+    <label class="form-label">Portfolio</label>
+    <p class="form-control-plaintext">
+      <%= trade.portfolio.user.username %> - Portfolio #<%= trade.portfolio.id %>
+    </p>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Asset</label>
+    <p class="form-control-plaintext">
+      <%= trade.custom_asset.name %> (<%= trade.custom_asset.symbol %>)
+    </p>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :quantity %>
+    <%= form.number_field :quantity, class: "form-control", step: 0.01 %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :price %>
+    <%= form.number_field :price, class: "form-control", step: 0.01 %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :trade_type %>
+    <%= form.select :trade_type, ["buy", "sell"], {}, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :executed_at %>
+    <%= form.datetime_select :executed_at, class: "form-control" %>
+  </div>
+
+  <%= form.submit class: "btn btn-success" %>
+<% end %>

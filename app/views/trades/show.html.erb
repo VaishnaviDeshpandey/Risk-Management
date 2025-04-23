@@ -1,0 +1,34 @@
+<h1>Trade Details</h1>
+
+<p>
+  <strong>Portfolio:</strong>
+  <%= @trade.portfolio&.user&.username || "N/A" %>
+</p>
+
+<p>
+  <strong>Asset:</strong>
+  <%= @trade.custom_asset&.name || "N/A" %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @trade.quantity %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @trade.price %>
+</p>
+
+<p>
+  <strong>Trade Type:</strong>
+  <%= @trade.trade_type.capitalize %>
+</p>
+
+<p>
+  <strong>Executed At:</strong>
+  <%= @trade.executed_at.strftime("%d %B %Y, %H:%M") %>
+</p>
+
+<%= link_to 'Edit', edit_trade_path(@trade), class: "btn btn-warning" %>
+<%= link_to 'Back', trades_path, class: "btn btn-secondary" %>

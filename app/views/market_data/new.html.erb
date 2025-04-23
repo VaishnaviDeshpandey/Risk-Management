@@ -1,0 +1,12 @@
+<h1>New Market Data</h1>
+
+<% is_edit = false %>
+
+<%= form_with scope: :market_data, url: market_data_path, method: :post, local: true do |form| %>
+  <%= render partial: 'form', locals: { form: form, data: @data } %>
+
+  <div>
+    <%= form.submit "Create Market Data" %>
+    <%= link_to "Back", market_data_path %>
+  </div>
+<% end %>

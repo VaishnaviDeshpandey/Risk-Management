@@ -1,0 +1,11 @@
+<h1><%= @custom_asset.name %> Details</h1>
+
+<ul class="list-group">
+  <li class="list-group-item"><strong>Symbol:</strong> <%= @custom_asset.symbol %></li>
+  <li class="list-group-item"><strong>Asset Type:</strong> <%= @custom_asset.asset_type %></li>
+  <li class="list-group-item"><strong>Sector:</strong> <%= @custom_asset.sector %></li>
+  <li class="list-group-item"><strong>Price:</strong> <%= number_to_currency(@custom_asset.price) %></li>
+</ul>
+
+<%= link_to 'Edit', edit_custom_asset_path(@custom_asset), class: 'btn btn-warning mt-3' %>
+<%= link_to 'Back', custom_assets_path, class: 'btn btn-secondary mt-3' %>

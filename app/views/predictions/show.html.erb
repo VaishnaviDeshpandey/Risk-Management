@@ -1,0 +1,10 @@
+<h1>Prediction</h1>
+
+<p><strong>Symbol:</strong> <%= @prediction[:symbol] %></p>
+<p><strong>Price:</strong> <%= @prediction[:predicted_price] %></p>
+<p><strong>Risk:</strong> <%= @prediction[:risk_level] %></p>
+<p><strong>Forecast Date:</strong> <%= @prediction[:forecast_date] %></p>
+
+<%= link_to "Back", predictions_path %>
+
+
